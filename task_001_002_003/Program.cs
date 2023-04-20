@@ -48,16 +48,20 @@ void task002()
     int max = IntRead("maximal value in array");
     int index = IntRead("index");
 
-    while (index < 10 || index > 99)
-    {
-        System.Console.WriteLine("This is an invalid index");
-    }
-
-
+    SearchByIndex(GetPrintArray(m,n,min,max),index);
 }
 
+// Задайте двумерный массив из целых чисел.найдите среднее арифметическое элементов в каждом столбце
 void task003()
 {
+    int m = IntRead("number of line");
+    int n = IntRead("number of columns");
+    int min = IntRead("minimum value in array");
+    int max = IntRead("maximal value in array");
+
+    int[,] array = GetPrintArray(m,n,min,max);
+
+
 
 }
 
@@ -113,10 +117,33 @@ int[,] GetPrintArray(int m, int n, int min, int max)
         }
         System.Console.WriteLine();
     }
+    System.Console.WriteLine();
     return array;
 }
 
-int SearchByIndex(int[,] array)
+void SearchByIndex(int[,] array, int index)
 {
+    while (index < 0 || index > 99)
+    {
+        System.Console.WriteLine("This is an invalid index");
+        index = IntRead("index");
+    }
+
+    int m = index/10;
+    int n = index%10;
+
+    if(m < array.GetLength(0) && n < array.GetLength(1))
+    {
+        System.Console.WriteLine($"array[{m},{n}] = {array[m,n]}");
+    }
+    else
+    {
+        System.Console.WriteLine("This element does not exist");
+    }
+}
+
+double[,] ColumnsAverage(int array)
+{
+    
 
 }
