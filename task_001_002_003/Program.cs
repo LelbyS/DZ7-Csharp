@@ -60,9 +60,13 @@ void task003()
     int max = IntRead("maximal value in array");
 
     int[,] array = GetPrintArray(m,n,min,max);
+    double[] average = ColumnsAverage(array);
 
-
-
+    for (int i = 0; i < average.Length; i++)
+    {
+     System.Console.Write($"{average[i]} ");   
+    }
+    System.Console.WriteLine();
 }
 
 int IntRead(string argument)
@@ -99,7 +103,7 @@ int[,] GetArray(int m, int n, int min, int max)
     {
         for (int j = 0; j < n; j++)
         {
-            array[i,j] = new Random().Next(min,max);
+            array[i,j] = new Random().Next(min,max+1);
         }
     }
     return array;
@@ -112,7 +116,7 @@ int[,] GetPrintArray(int m, int n, int min, int max)
     {
         for (int j = 0; j < n; j++)
         {
-            array[i,j] = new Random().Next(min,max);
+            array[i,j] = new Random().Next(min,max+1);
             System.Console.Write($"{array[i,j]} ");
         }
         System.Console.WriteLine();
@@ -142,8 +146,18 @@ void SearchByIndex(int[,] array, int index)
     }
 }
 
-double[,] ColumnsAverage(int array)
+double[] ColumnsAverage(int[,] array)
 {
-    
-
+    double summ = 0;
+    double[] average = new double[array.GetLength(1)];
+    for (int j = 0; j < array.GetLength(1); j++)
+    {
+        for (int i = 0; i < array.GetLength(0); i++)
+        {
+            summ = summ + array[i,j];
+            average[j] = Math.Round(summ/array.GetLength(0), 2);
+        }
+        summ = 0;
+    }
+    return average;
 }
